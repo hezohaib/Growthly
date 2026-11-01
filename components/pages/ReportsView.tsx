@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { motion } from "framer-motion";
 import { cohortRetention, monthlyTotals, weeklyFlow } from "@/lib/reports";
 import { toCsv, downloadFile } from "@/lib/csv";
 import { compactUsd, num, usd } from "@/lib/format";
@@ -92,11 +93,16 @@ function Reports({ series }: { series: DayPoint[] }) {
             </thead>
             <tbody>
               {[...months].reverse().map((m) => (
-                <tr key={m.key}>
+                <motion.tr
+                  key={m.key}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="transition-colors duration-150 hover:bg-accent-soft/60"
+                >
                   <td className="border-b border-line px-2 py-2.5 font-medium">{m.label}</td>
                   <td className="border-b border-line px-2 py-2.5 text-right tabular-nums">{usd(m.revenue)}</td>
                   <td className="border-b border-line px-2 py-2.5 text-right tabular-nums">{num(m.signups)}</td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>

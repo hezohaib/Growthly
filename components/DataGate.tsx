@@ -3,13 +3,14 @@
 import type { ReactNode } from "react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import type { AnalyticsData } from "@/lib/types";
-import { DashboardSkeleton } from "./DashboardSkeleton";
 
-/** Shows a skeleton while loading and a retry panel on error; otherwise hands the data to its child. */
-export function DataGate({ children }: { children: (data: AnalyticsData) => ReactNode }) {
-  const { data, isPending, error, refetch } = useAnalytics();
+interface Props {
+  children: (data: AnalyticsData) => ReactNode;
+}
 
-  if (isPending) return <DashboardSkeleton />;
+/** Renders immediately from the preloaded cache or shows an error retry panel if data fails to load. */
+export function DataGate({ children }: Props) {
+  const { data, error, refetch } = useAnalytics();
 
   if (!data) {
     return (

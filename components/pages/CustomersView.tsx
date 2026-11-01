@@ -185,9 +185,10 @@ function CustomersTable() {
                   layout="position"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
                   onClick={() => router.push(`/customers/${c.id}`)}
-                  className="cursor-pointer hover:bg-accent-soft/60"
+                  className="group cursor-pointer transition-colors duration-150 hover:bg-accent-soft/70"
                 >
                   <td className={cell}>
                     <Link

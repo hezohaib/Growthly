@@ -114,7 +114,7 @@ function DrawerPanel({ drawer }: { drawer: Exclude<DrawerState, null> }) {
 
     if (editing) {
       updateCustomer(editing.id, { ...v, mrr });
-      toast({ message: `${v.name} updated` });
+      toast({ message: `${v.name} updated successfully`, tone: "success" });
     } else {
       // unique id, also avoiding ids of customers that were deleted earlier
       const taken = new Set([...customers.map((c) => c.id), ...useCustomerStore.getState().removed]);
@@ -123,7 +123,7 @@ function DrawerPanel({ drawer }: { drawer: Exclude<DrawerState, null> }) {
       let n = 2;
       while (taken.has(id)) id = `${base}-${n++}`;
       addCustomer({ id, ...v, mrr, joined: new Date().toISOString().slice(0, 10) });
-      toast({ message: `${v.name} added` });
+      toast({ message: "Customer added successfully", tone: "success" });
     }
     close();
   }

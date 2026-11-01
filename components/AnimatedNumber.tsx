@@ -13,6 +13,7 @@ interface Props {
 export function AnimatedNumber({ value, format }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const mv = useMotionValue(0);
+  const isFirstMount = useRef(true);
   const reduce = useReducedMotion();
 
   // write the animated value straight into the DOM (no React re-render per frame)
@@ -25,11 +26,27 @@ export function AnimatedNumber({ value, format }: Props) {
   useEffect(() => {
     if (reduce) {
       mv.set(value);
+      if (ref.current) ref.current.textContent = format(value);
       return;
     }
-    const controls = animate(mv, value, { duration: 0.7, ease: "easeOut" });
-    return () => controls.stop();
-  }, [mv, value, reduce]);
 
-  return <span ref={ref}>{format(value)}</span>;
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      mv.set(0);
+      if (ref.current) ref.current.textContent = format(0);
+      const controls = animate(mv, value, {
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1], // premium smooth custom easeOut
+      });
+      return () => controls.stop();
+    }
+
+    const controls = animate(mv, value, {
+      duration: 0.75,
+      ease: [0.16, 1, 0.3, 1],
+    });
+    return () => controls.stop();
+  }, [mv, value, reduce, format]);
+
+  return <span ref={ref}>{format(0)}</span>;
 }

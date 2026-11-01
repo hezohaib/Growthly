@@ -14,12 +14,26 @@ import { Icon } from "./ui/Icon";
 const FORMATTERS: Record<KpiKind, (n: number) => string> = { usd, int: num, percent };
 
 const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07 } },
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
 };
+
 const item: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
 };
 
 export function KpiCards({ series }: { series: DayPoint[] }) {

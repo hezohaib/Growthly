@@ -66,7 +66,15 @@ export function SettingsView() {
       <section className="panel mb-3">
         <h2 className="text-[15px] font-semibold">Appearance</h2>
         <Row title="Theme" hint="Choose light, dark, or follow your device.">
-          <Segmented label="Theme" options={THEMES} value={themeValue} onChange={setTheme} />
+          <Segmented
+            label="Theme"
+            options={THEMES}
+            value={themeValue}
+            onChange={(val) => {
+              setTheme(val);
+              toast({ message: `Theme switched to ${val}`, tone: "success" });
+            }}
+          />
         </Row>
       </section>
 
@@ -81,7 +89,13 @@ export function SettingsView() {
             role="switch"
             aria-checked={compare}
             aria-label="Compare to previous period"
-            onClick={() => setCompare(!compare)}
+            onClick={() => {
+              setCompare(!compare);
+              toast({
+                message: !compare ? "Comparison period enabled" : "Comparison period disabled",
+                tone: "info",
+              });
+            }}
             className={cn(
               "relative h-6 w-11 rounded-full border border-line transition-colors",
               compare ? "bg-accent" : "bg-line/70",
@@ -151,7 +165,7 @@ function GoalForm({ initial }: { initial: number }) {
     }
     setError("");
     setGoal(n);
-    toast({ message: `Goal set to ${usd(n)}` });
+    toast({ message: "Settings updated successfully", tone: "success" });
   }
 
   return (

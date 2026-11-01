@@ -105,10 +105,13 @@ export function TopCustomersCard({ customers }: { customers: Customer[] }) {
         <ul className="divide-y divide-line">
           {top.map((c) => (
             <li key={c.id}>
-              <Link href={`/customers/${c.id}`} className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-2.5 hover:bg-accent-soft">
+              <Link
+                href={`/customers/${c.id}`}
+                className="group -mx-2 flex items-center gap-3 rounded-lg px-2.5 py-2.5 transition-all duration-200 ease-out hover:translate-x-1 hover:bg-accent-soft/80"
+              >
                 <Avatar name={c.name} />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-medium">{c.name}</span>
+                  <span className="block truncate text-sm font-medium transition-colors duration-150 group-hover:text-accent">{c.name}</span>
                   <span className="block text-xs text-muted">{c.seats} seats</span>
                 </span>
                 <PlanPill plan={c.plan} />
@@ -134,10 +137,13 @@ export function AtRiskCard({ customers }: { customers: Customer[] }) {
         <ul className="divide-y divide-line">
           {risky.map(({ customer: c, score }) => (
             <li key={c.id}>
-              <Link href={`/customers/${c.id}`} className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-2.5 hover:bg-accent-soft">
+              <Link
+                href={`/customers/${c.id}`}
+                className="group -mx-2 flex items-center gap-3 rounded-lg px-2.5 py-2.5 transition-all duration-200 ease-out hover:translate-x-1 hover:bg-accent-soft/80"
+              >
                 <Avatar name={c.name} />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-medium">{c.name}</span>
+                  <span className="block truncate text-sm font-medium transition-colors duration-150 group-hover:text-accent">{c.name}</span>
                   <span className="block text-xs text-muted">{usd(c.mrr)} / month</span>
                 </span>
                 <HealthPill score={score} />
@@ -169,10 +175,13 @@ export function ActivityCard({ customers }: { customers: Customer[] }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05, duration: 0.25 }}
             >
-              <Link href={`/customers/${c.id}`} className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-accent-soft">
+              <Link
+                href={`/customers/${c.id}`}
+                className="group -mx-2 flex items-center gap-3 rounded-lg px-2.5 py-2 transition-all duration-200 ease-out hover:translate-x-1 hover:bg-accent-soft/80"
+              >
                 <span className={cn("size-2 shrink-0 rounded-full", TONE_DOT[e.tone])} />
                 <span className="min-w-0 flex-1 truncate text-sm">
-                  <strong className="font-medium">{c.name}</strong> <span className="text-muted">{e.title}</span>
+                  <strong className="font-medium transition-colors duration-150 group-hover:text-accent">{c.name}</strong> <span className="text-muted">{e.title}</span>
                 </span>
                 <span className="shrink-0 text-xs tabular-nums text-muted">{fullDate(e.date)}</span>
               </Link>

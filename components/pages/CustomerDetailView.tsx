@@ -164,14 +164,19 @@ function CustomerProfile({ customer: c }: { customer: Customer }) {
                 </thead>
                 <tbody>
                   {bills.map((b) => (
-                    <tr key={b.id}>
+                    <motion.tr
+                      key={b.id}
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.18, ease: "easeOut" }}
+                      className="transition-colors duration-150 hover:bg-accent-soft/60"
+                    >
                       <td className="border-b border-line px-2 py-2.5 tabular-nums">{b.id}</td>
                       <td className="border-b border-line px-2 py-2.5 text-muted">{fullDate(b.date)}</td>
                       <td className="border-b border-line px-2 py-2.5 text-right font-medium tabular-nums">{usd(b.amount)}</td>
                       <td className="border-b border-line px-2 py-2.5">
                         <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium", INVOICE_STYLE[b.status])}>{b.status}</span>
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>
