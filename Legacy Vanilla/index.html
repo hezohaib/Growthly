@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Growthly Analytics</title>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div>
+                <h1>Growthly Analytics</h1>
+                <p class="sub" id="period"></p>
+            </div>
+            <div class="bar">
+                <div class="seg" role="group" aria-label="Date range" id="ranges">
+                    <button data-range="7">7 days</button><button data-range="30">30 days</button><button
+                        data-range="90">90 days</button>
+                </div>
+                <button class="btn" id="theme" aria-label="Toggle theme">Theme</button>
+            </div>
+        </header>
+
+        <section class="kpis" id="kpis" aria-label="Key metrics"></section>
+
+        <section class="grid">
+            <div class="panel">
+                <div class="ph">
+                    <h2>Trend</h2>
+                    <div class="seg" role="group" aria-label="Metric" id="metrics">
+                        <button data-metric="revenue">Revenue</button><button
+                            data-metric="signups">Signups</button><button data-metric="active">Active users</button>
+                    </div>
+                </div>
+                <div class="chart" id="chart"></div>
+            </div>
+            <div class="panel">
+                <h2 style="margin-bottom:12px">Recurring revenue by plan</h2>
+                <div id="plans"></div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="ph">
+                <h2>Customers</h2>
+                <div class="tools"><input type="search" id="q" placeholder="Search by name"
+                        aria-label="Search customers"></div>
+            </div>
+            <div class="tw">
+                <table>
+                    <thead>
+                        <tr id="thead"></tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            <div class="pager" id="pager"></div>
+        </section>
+
+        <details class="panel">
+            <summary>How this is built</summary>
+            <ul>
+                <li>One state object. Every click changes state, then render() redraws only what depends on it.</li>
+                <li>Data comes from a seeded random generator, so numbers are the same on every load.</li>
+                <li>KPIs compare the selected period against the equal-length period before it.</li>
+                <li>The line chart is hand-built SVG: scale functions, a rounded axis maximum, and
+                    pointer-to-nearest-day hover.</li>
+                <li>The table filters, sorts and paginates in that order. Search is debounced and keeps input focus.
+                </li>
+                <li>Plain HTML, CSS and JavaScript. Keyboard and screen-reader friendly, light and dark themes.</li>
+            </ul>
+        </details>
+    </div>
+</body>
+
+</html>
